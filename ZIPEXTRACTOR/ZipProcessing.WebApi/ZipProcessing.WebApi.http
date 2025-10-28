@@ -1,0 +1,6 @@
+@ZipProcessing.WebApi_HostAddress = http://localhost:5258
+
+GET {{ZipProcessing.WebApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
