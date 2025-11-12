@@ -14,7 +14,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/JobRequest"
+                "$ref": "#/components/schemas/ApiRequest"
               }
             }
           },
@@ -89,6 +89,20 @@
   },
   "components": {
     "schemas": {
+      "ApiRequest": {
+        "type": "object",
+        "properties": {
+          "requestId": {
+            "type": "string",
+            "nullable": true
+          },
+          "fileName": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "JobRequest": {
         "type": "object",
         "properties": {

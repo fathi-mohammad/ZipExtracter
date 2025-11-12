@@ -1,0 +1,589 @@
+﻿@model IEnumerable<dynamic>
+@using System.Text.Json
+@{
+    ViewData["Title"] = "Dashboard";
+    var user = ViewBag.User;
+    var services = ViewBag.AvailableServices as List<ZipProcessor.Admin.Models.ServiceDefinition> ?? new();
+    var servicesJson = JsonSerializer.Serialize(services);
+    var apis = ViewBag.ApiList as List<dynamic> ?? new();
+}
+<style>
+    #apiBody, #apiResponse {
+        font-family: "Consolas", monospace;
+        font-size: 0.9rem;
+        white-space: pre-wrap;
+    }
+</style>
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Dashboard - Worker Admin</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand">⚙️ Worker Dashboard</a>
+            <div class="d-flex">
+                <span class="navbar-text text-white me-3">Hello, @user</span>
+                <a href="/Account/Logout" class="btn btn-outline-light btn-sm">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- hidden antiforgery token for AJAX posts -->
+    <form id="antiForgeryForm" style="display:none">
+        @Html.AntiForgeryToken()
+    </form>
+
+    <div class=" mt-4">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h3>Active Workers</h3>
+            <!-- Button opens modal -->
+            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#startWorkerModal">➕ Start New Worker</button>
+        </div>
+
+        <table class="table table-striped">
+            <thead class="">
+                <tr>
+                    <th>Name</th>
+                    <th>Mode</th>
+                    <th>api url</th>
+                    <th>Status</th>
+                      <th>Started</th>
+                    <th>Last Ping</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var w in Model)
+                {
+                    var cid = (string)w.container_id;
+                    <tr data-container="@cid">
+                        <td>@w.worker_name</td>
+                        <td>@w.mode</td>
+                        <td>@w.api_url</td>
+                        <td class="status-cell">
+                            @if (w.status == "Running")
+                            {
+                                <span class="badge bg-success">Running</span>
+                            }
+                            else if (w.status == "Paused")
+                            {
+                                <span class="badge bg-warning text-dark">Paused</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-secondary">@w.status</span>
+                            }
+                    </td>
+                    <td>@w.created_at</td>
+                    <td class="lastping-cell">
+                        @((w.last_successful_ping != null)
+                                                ? ((DateTime)w.last_successful_ping).ToLocalTime().ToString("g")
+                                                : "n/a")
+                    </td>
+
+                        <td class="d-flex align-items-center gap-2">
+
+                            <!-- Local Stop Button (kills process) -->
+                        @if (w.status == "Running")
+                            {
+                                <form method="post" asp-action="StopWorker" class="d-inline">
+                                    @Html.AntiForgeryToken()
+                                    <input type="hidden" name="id" value="@w.container_id" />
+                                    <button class="btn btn-sm btn-danger">Stop</button>
+                                </form>
+                            }
+
+                            <!-- Pause / Resume Buttons -->
+                            @if (w.status == "Running")
+                            {
+                                <button class="btn btn-sm btn-warning btn-pause" data-container="@cid" type="button">Pause</button>
+                            }
+                            else if (w.status == "Paused")
+                            {
+                                <button class="btn btn-sm btn-primary btn-resume" data-container="@cid" type="button">Resume</button>
+                            }
+
+                            <!-- Actions Dropdown -->
+                            <div class="dropdown">
+                                <button class="btn btn-sm btn-outline-dark dropdown-toggle" type="button" id="dropdownMenu_@cid"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                    Actions
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu_@cid">
+                                    @foreach (var api in apis)
+                                    {
+                                        <li>
+                                            <button type="button"
+                                                    class="dropdown-item btn-api-action"
+                                                    data-action="@api.api_name"
+                                                    data-container="@cid">
+                                                @api.api_name
+                                            </button>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Modal: API Request/Response -->
+    <div class="modal fade" id="apiModal" tabindex="-1" aria-labelledby="apiModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header bg-dark text-white">
+                    <h5 class="modal-title" id="apiModalLabel">Send API Request</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <label class="form-label fw-bold">API Name</label>
+                            <input type="text" id="apiName" class="form-control" readonly>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label fw-bold">HTTP Method</label>
+                            <input type="text" id="apiMethod" class="form-control" readonly>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label fw-bold">Endpoint</label>
+                            <input type="text" id="apiEndpoint" class="form-control" readonly>
+                        </div>
+                    </div>
+
+                    <div class="mt-3">
+                        <label class="form-label fw-bold">Request Body</label>
+                        <textarea id="apiBody" class="form-control font-monospace" rows="10" spellcheck="false"></textarea>
+                    </div>
+
+                    <div class="mt-3">
+                        <label class="form-label fw-bold">Response</label>
+                        <pre id="apiResponse" class="border rounded bg-light p-3 text-dark" style="max-height:300px; overflow:auto;"></pre>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" id="btnSendApi" class="btn btn-primary">Send Request</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Start Worker Modal (single form that posts all fields including dynamic args) -->
+    <div class="modal fade" id="startWorkerModal" tabindex="-1" aria-labelledby="startWorkerModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <form asp-action="StartWorker" method="post" id="startWorkerForm" class="needs-validation" novalidate>
+            @Html.AntiForgeryToken()
+            <div class="modal-header">
+              <h5 class="modal-title" id="startWorkerModalLabel">Start Worker</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+              <div class="mb-3">
+                <label class="form-label">Choose Service</label>
+                <select id="serviceSelect" name="SelectedServiceName" class="form-select" required>
+                  <option value="">-- choose --</option>
+                  @foreach (var s in services)
+                  {
+                      <option value="@s.Name" data-json='@Html.Raw(JsonSerializer.Serialize(s))'>@s.Name (@s.Type)</option>
+                  }
+                </select>
+              </div>
+
+              <div class="row g-2">
+                <div class="col-md-3">
+                  <label class="form-label">Server Type</label>
+                  <select id="serverType" name="ServerType" class="form-select">
+                    <option value="Exe" selected>Exe</option>
+                    <option value="Docker">Docker</option>
+                  </select>
+                </div>
+
+                <div class="col-md-3">
+                  <label class="form-label">Port</label>
+                  <input id="port" name="Port" type="number" class="form-control" />
+                </div>
+
+                <div class="col-md-6">
+                  <label class="form-label">Exe Path</label>
+                  <input id="exePath" name="ExePath" type="text" class="form-control" placeholder="Path to exe (optional)"/>
+                </div>
+              </div>
+
+              <div class="mt-2">
+                <label class="form-label">Docker Image</label>
+                <input id="imageName" name="ImageName" type="text" class="form-control" placeholder="Docker image (optional)" />
+              </div>
+
+              <div class="mt-2">
+                <label class="form-label">Additional Arguments</label>
+                <input id="additionalArgs" name="AdditionalArguments" type="text" class="form-control" placeholder='Free-form args e.g. --WorkerSettings:BatchSize 3' />
+              </div>
+
+              <hr />
+
+              <!-- Dynamic inputs for the selected service appear here -->
+              <div id="serviceInputsContainer"></div>
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+              <button type="submit" class="btn btn-primary">Start</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <script>
+        (function(){
+          const token = document.querySelector('#antiForgeryForm input[name="__RequestVerificationToken"]').value;
+          const apis = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(apis));
+
+          let selectedContainerId = null;
+          let selectedApi = null;
+          const modalEl = document.getElementById('apiModal');
+          const modal = new bootstrap.Modal(modalEl);
+          const apiNameEl = document.getElementById('apiName');
+          const apiMethodEl = document.getElementById('apiMethod');
+          const apiEndpointEl = document.getElementById('apiEndpoint');
+          const apiBodyEl = document.getElementById('apiBody');
+          const apiResponseEl = document.getElementById('apiResponse');
+
+          // When clicking any API button from dropdown
+          document.addEventListener('click', (ev) => {
+            const btn = ev.target.closest('.btn-api-action');
+            if (!btn) return;
+
+            const apiName = btn.dataset.action;
+            const containerId = btn.dataset.container;
+
+            const api = apis.find(a => a.api_name === apiName);
+            if (!api) {
+              alert("API definition not found.");
+              return;
+            }
+
+            selectedContainerId = containerId;
+            selectedApi = api;
+
+            apiNameEl.value = api.api_name;
+            apiMethodEl.value = api.http_method;
+            apiEndpointEl.value = api.endpoint;
+            apiBodyEl.value = api.request_template || "{}";
+            apiResponseEl.textContent = "";
+
+            modal.show();
+          });
+
+          //  When clicking "Send Request" button inside modal
+          document.getElementById('btnSendApi').addEventListener('click', async () => {
+            if (!selectedContainerId || !selectedApi) return;
+
+            const apiName = selectedApi.api_name;
+            const requestBody = apiBodyEl.value;
+
+            const body = new URLSearchParams({
+              id: selectedContainerId,
+              apiName: apiName,
+              requestBody: requestBody
+            });
+
+            apiResponseEl.textContent = "⏳ Sending request...";
+            try {
+              const resp = await fetch('/Dashboard/CallWorkerApi', {
+                method: 'POST',
+                headers: {
+                  'RequestVerificationToken': token,
+                  'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: body.toString()
+              });
+
+              const result = await resp.json();
+
+              // pretty print JSON result
+              apiResponseEl.textContent = JSON.stringify(result, null, 2);
+            } catch (err) {
+              apiResponseEl.textContent = "❌ Error: " + err.message;
+            }
+          });
+        })();
+    </script>
+
+
+    <script>
+      (function(){
+        const services = @Html.Raw(JsonSerializer.Serialize(services));
+        const serviceSelect = document.getElementById('serviceSelect');
+        const serverType = document.getElementById('serverType');
+        const exePath = document.getElementById('exePath');
+        const imageName = document.getElementById('imageName');
+        const additionalArgs = document.getElementById('additionalArgs');
+        const port = document.getElementById('port');
+        const inputsContainer = document.getElementById('serviceInputsContainer');
+
+        // When service changes, prefill fields and render its Inputs (if any)
+        serviceSelect?.addEventListener('change', function(e){
+          inputsContainer.innerHTML = '';
+          const opt = this.options[this.selectedIndex];
+          if (!opt || !opt.value) {
+            exePath.value = '';
+            imageName.value = '';
+            additionalArgs.value = '';
+            port.value = '';
+            serverType.value = 'Exe';
+            return;
+          }
+
+          const svc = JSON.parse(opt.getAttribute('data-json') || '{}');
+
+          serverType.value = svc.Type || 'Exe';
+          exePath.value = svc.ExePath || '';
+          imageName.value = svc.Image || '';
+          additionalArgs.value = svc.DefaultArgs || '';
+          port.value = svc.DefaultPort || '';
+
+          // If service declares Inputs render one input per entry.
+          // Each rendered input uses name="arg__{Key}" so controller receives it.
+          if (svc.Inputs && Array.isArray(svc.Inputs)) {
+            svc.Inputs.forEach(i => {
+              const div = document.createElement('div');
+              div.className = 'mb-2';
+              const label = document.createElement('label');
+              label.textContent = i.Label || i.Key;
+              label.className = 'form-label';
+              const input = document.createElement('input');
+              input.className = 'form-control';
+              input.name = 'arg__' + i.Key; // controller expects arg__{Key}
+              input.placeholder = i.Placeholder || i.Default || '';
+              if (i.Default) input.value = i.Default;
+              // set input type for simple client-side help
+              input.type = (i.Type && i.Type.toLowerCase() === 'int') ? 'number' : 'text';
+              div.appendChild(label);
+              div.appendChild(input);
+              inputsContainer.appendChild(div);
+            });
+          }
+        });
+
+        // simple client-side validation: require service selected
+        const form = document.getElementById('startWorkerForm');
+        form?.addEventListener('submit', function(e){
+          if (!serviceSelect.value) {
+            e.preventDefault();
+            alert('Please select a service to start.');
+            return false;
+          }         
+        });
+      })();
+    </script>
+
+    <script>
+      (function(){
+        const antiTokenInput = document.querySelector('#antiForgeryForm input[name="__RequestVerificationToken"]');
+        const token = antiTokenInput ? antiTokenInput.value : null;
+        const pollIntervalMs = 10000; // adjust as desired
+
+                let isPolling = false;
+
+        async function probeAll() {
+          if (isPolling) return;       // avoid overlapping polls
+          isPolling = true;
+          try {
+            const resp = await fetch('/Dashboard/ProbeAll'); // or '/Dashboard/ProbeAll?includePaused=true'
+            if (!resp.ok) return;
+            const data = await resp.json();
+           // console.log("data",data);
+               data.forEach(item => {
+                const row = document.querySelector(`tr[data-container="${item.container_id}"]`);
+                if (!row) return;
+                const statusCell = row.querySelector('.status-cell');
+                const lastCell = row.querySelector('.lastping-cell');
+
+                      if (item.ok) {
+          const api = item.api || {};
+          const status = (item.status || "").toLowerCase(); // backend status string
+
+          let badge = '<span class="badge bg-success">Running</span>';
+
+          if (status === 'stopped' || (api && api.stopped)) {
+            badge = '<span class="badge bg-secondary">Stopped</span>';
+          } else if (status === 'paused' || (api && api.paused)) {
+            badge = '<span class="badge bg-warning text-dark">Paused</span>';
+          }
+
+          statusCell.innerHTML = badge;
+
+          // Update last ping
+          const last = item.last_successful_ping
+            ? new Date(item.last_successful_ping).toLocaleString()
+            : new Date().toLocaleString();
+          lastCell.textContent = last;
+
+          // Action buttons
+          const actionCell = row.querySelector('td:last-child');
+          if (actionCell) {
+            actionCell.querySelectorAll('.btn-pause, .btn-resume').forEach(b => b.remove());
+            if (status === 'stopped' || (api && api.stopped)) {
+              // No buttons
+            } else if (status === 'paused' || (api && api.paused)) {
+              const btn = document.createElement('button');
+              btn.type = 'button';
+              btn.className = 'btn btn-sm btn-primary btn-resume';
+              btn.dataset.container = item.container_id;
+              btn.textContent = 'Resume';
+              actionCell.appendChild(btn);
+            } else {
+              const btn = document.createElement('button');
+              btn.type = 'button';
+              btn.className = 'btn btn-sm btn-warning btn-pause';
+              btn.dataset.container = item.container_id;
+              btn.textContent = 'Pause';
+              actionCell.appendChild(btn);
+            }
+          }
+        }
+         else {
+                  statusCell.innerHTML = '<span class="badge bg-danger">Unreachable</span>';
+                  lastCell.textContent = item.message || 'n/a';
+                }
+              });
+          } catch (e) {
+            console.warn('ProbeAll error', e);
+          } finally {
+            isPolling = false;
+          }
+        }
+
+
+
+
+
+        
+          console.log("Dashboard control script loaded");
+        // attach delegated handlers for pause/resume
+               document.addEventListener('click', async (ev) => {
+          const target = ev.target;
+          if (!(target instanceof Element)) return;
+
+          // ----- PAUSE -----
+          if (target.matches('.btn-pause')) {
+            const cid = target.getAttribute('data-container');
+            if (!cid) return;
+
+            try {
+              const body = new URLSearchParams({ id: cid });
+              const resp = await fetch('/Dashboard/PauseWorker', {
+                method: 'POST',
+                headers: {
+                  'RequestVerificationToken': token || '',
+                  'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: body.toString()
+              });
+
+              if (resp.ok) {
+                const js = await resp.json();
+                const row = document.querySelector(`tr[data-container="${cid}"]`);
+                if (row) {
+                  // Update status badge
+                  row.querySelector('.status-cell').innerHTML =
+                    '<span class="badge bg-warning text-dark">Paused</span>';
+
+                  // Update last ping if provided
+                  if (js.last_successful_ping)
+                    row.querySelector('.lastping-cell').textContent =
+                      new Date(js.last_successful_ping).toLocaleString();
+
+                  // Remove Pause button and add Resume
+                  target.remove();
+                  const actionCell = row.querySelector('td:last-child');
+                  const btn = document.createElement('button');
+                  btn.type = 'button';
+                  btn.className = 'btn btn-sm btn-primary btn-resume';
+                  btn.dataset.container = cid;
+                  btn.textContent = 'Resume';
+                  actionCell.appendChild(btn);
+                }
+              } else {
+                console.warn('Pause failed', resp.status);
+              }
+            } catch (err) {
+              console.error(err);
+            }
+          }
+
+          // ----- RESUME -----
+          if (target.matches('.btn-resume')) {
+            const cid = target.getAttribute('data-container');
+            if (!cid) return;
+
+            try {
+              const body = new URLSearchParams({ id: cid });
+              const resp = await fetch('/Dashboard/ResumeWorker', {
+                method: 'POST',
+                headers: {
+                  'RequestVerificationToken': token || '',
+                  'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: body.toString()
+              });
+
+              if (resp.ok) {
+                const js = await resp.json();
+                const row = document.querySelector(`tr[data-container="${cid}"]`);
+                if (row) {
+                  // Update badge
+                  row.querySelector('.status-cell').innerHTML =
+                    '<span class="badge bg-success">Running</span>';
+
+                  // Update last ping if present
+                  if (js.last_successful_ping)
+                    row.querySelector('.lastping-cell').textContent =
+                      new Date(js.last_successful_ping).toLocaleString();
+
+                  // Remove Resume button and add Pause
+                  target.remove();
+                  const actionCell = row.querySelector('td:last-child');
+                  const btn = document.createElement('button');
+                  btn.type = 'button';
+                  btn.className = 'btn btn-sm btn-warning btn-pause';
+                  btn.dataset.container = cid;
+                  btn.textContent = 'Pause';
+                  actionCell.appendChild(btn);
+                }
+              } else {
+                console.warn('Resume failed', resp.status);
+              }
+            } catch (err) {
+              console.error(err);
+            }
+          }
+        });
+
+
+        // start polling
+        probeAll();
+        setInterval(probeAll, pollIntervalMs);
+      })();
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+   
+
+</body>
+</html>

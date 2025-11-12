@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\WORK\\ZIPEXTRACTOR\\ZipProcessing.WebApi\\ZipProcessing.WebApi.csproj": {}
+    "D:\\WORK\\ZIPEXTRACTOR\\ZipProcessing.WebApi\\ZipProcessing.WebApi.csproj": {}
   },
   "projects": {
-    "C:\\WORK\\ZIPEXTRACTOR\\ZipProcessing.WebApi\\ZipProcessing.WebApi.csproj": {
+    "D:\\WORK\\ZIPEXTRACTOR\\ZipProcessing.WebApi\\ZipProcessing.WebApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\WORK\\ZIPEXTRACTOR\\ZipProcessing.WebApi\\ZipProcessing.WebApi.csproj",
+        "projectUniqueName": "D:\\WORK\\ZIPEXTRACTOR\\ZipProcessing.WebApi\\ZipProcessing.WebApi.csproj",
         "projectName": "ZipProcessing.WebApi",
-        "projectPath": "C:\\WORK\\ZIPEXTRACTOR\\ZipProcessing.WebApi\\ZipProcessing.WebApi.csproj",
+        "projectPath": "D:\\WORK\\ZIPEXTRACTOR\\ZipProcessing.WebApi\\ZipProcessing.WebApi.csproj",
         "packagesPath": "C:\\Users\\Fathima P A\\.nuget\\packages\\",
-        "outputPath": "C:\\WORK\\ZIPEXTRACTOR\\ZipProcessing.WebApi\\obj\\",
+        "outputPath": "D:\\WORK\\ZIPEXTRACTOR\\ZipProcessing.WebApi\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

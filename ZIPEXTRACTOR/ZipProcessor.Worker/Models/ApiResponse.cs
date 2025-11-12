@@ -12,6 +12,6 @@ public class JobRow
 {
     public long Id { get; set; }
     public string? RequestId { get; set; }
-    public string? ZipPath { get; set; }
+    public string? FilePath { get; set; }
 }
 

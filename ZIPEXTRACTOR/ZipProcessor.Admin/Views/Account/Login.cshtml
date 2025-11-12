@@ -1,0 +1,39 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Login - Worker Admin</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body class="bg-light d-flex align-items-center justify-content-center vh-100">
+    <div class="card shadow p-4" style="width: 22rem;">
+        <h4 class="text-center mb-4">🔐 Admin Login</h4>
+        <form method="post">
+            <div class="mb-3">
+                <input type="text" name="username" class="form-control" placeholder="Username" required />
+            </div>
+            <div class="mb-3">
+                <input type="password" name="password" class="form-control" placeholder="Password" required />
+            </div>
+
+            <div class="mb-3">
+                <select name="mode" class="form-select" required>
+                    <option value="">-- Select Mode --</option>
+                    <option value="docker">Docker</option>
+                    <option value="executable">Executable</option>
+                </select>
+            </div>
+
+            @if (ViewBag.Error != null)
+            {
+                <div class="text-danger small">@ViewBag.Error</div>
+            }
+
+            <button class="btn btn-primary w-100 mt-3" type="submit">Login</button>
+        </form>
+    </div>
+</body>
+</html>

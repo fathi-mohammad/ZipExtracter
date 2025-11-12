@@ -71,7 +71,7 @@
     "Parameters": [
       {
         "Name": "req",
-        "Type": "ZipProcessing.WebApi.Models.JobRequest",
+        "Type": "ZipProcessing.WebApi.Models.ApiRequest",
         "IsRequired": true
       }
     ],

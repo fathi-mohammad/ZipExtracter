@@ -13,10 +13,25 @@ app.UseSwagger();
 app.UseSwaggerUI();
 
 //custom method api
-app.MapPost("/api/process", async (JobService service, JobRequest req) =>
+
+
+
+
+
+
+app.MapPost("/api/process", async (JobService service, ApiRequest req) =>
 {
-  //  var id = await service.AddJobAsync(req);
-    return Results.Ok(new { message = "success" , status=1 , path ="c://home/file_1000_2000_3000.pdf)" });
+    //  var id = await service.AddJobAsync(req);
+
+    var fiveDigitNumber = RandomHelpers.GenerateFiveDigitNumber();        // int 10000..99999
+    var fiveDigitString = RandomHelpers.GenerateFiveDigitString();        // "01234" or "54321"
+    var alpha5Crypto = RandomHelpers.GenerateAlphanumeric(5, useCrypto: true);  // crypto-safe 5-char
+    var alpha5Fast = RandomHelpers.GenerateAlphanumeric(5, useCrypto: false);  // faster non-crypto
+    return Results.Ok(new {request_id = req.RequestId, 
+        file_name = req.FileName,
+        file_path = $"c://home/file_{fiveDigitNumber}_{fiveDigitString}_{alpha5Crypto}.pdf)",
+        status = 1  , 
+        message = "success" });
 });
 
 

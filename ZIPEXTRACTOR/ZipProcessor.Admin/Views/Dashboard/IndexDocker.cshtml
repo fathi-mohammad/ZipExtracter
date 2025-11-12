@@ -1,0 +1,335 @@
+﻿@model ZipProcessor.Admin.Models.DockerDashboardVM
+@{
+    ViewData["Title"] = "Docker Worker Dashboard";
+}
+
+<div class="container mt-4">
+    <h2>Docker Worker Dashboard</h2>
+    <p class="text-muted">Auto-refreshes every 15 seconds</p>
+
+    <button id="refreshBtn" class="btn btn-sm btn-secondary mb-3">Refresh Now</button>
+
+    <table id="workersTable" class="table table-bordered table-striped align-middle">
+        <thead class="table-dark">
+            <tr>
+                <th>Worker ID</th>
+                <th>Container</th>
+                <th>Status</th>
+                <th>Last Heartbeat</th>
+                <th>Δ Created→HB (s)</th>
+                <th>Response (ms)</th>
+                <th>API URL</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="workerBody">
+            @foreach (var w in Model.Workers)
+            {
+                <tr>
+                    <td>@w.worker_id</td>
+                    <td>@w.container_name</td>
+                    <td>
+                        <span class="badge @(w.status == "Active" ? "bg-success" :
+                                                                       w.status == "Paused" ? "bg-warning" :
+                                                                       w.status == "Stopped" ? "bg-danger" : "bg-secondary")">
+                        @w.status
+                    </span>
+                </td>
+                <td></td>
+                <td></td>
+                <td>@(w.response_time_ms ?? 0)</td>
+                <td>@w.api_url</td>
+                <td>
+                    @foreach (var api in Model.ApiList)
+                        {
+                            <button class="btn btn-sm @(api.api_name == "Update Config" ? "btn-outline-warning" : "btn-outline-primary") me-1"
+                                    onclick="prepareApiCall('@w.api_url', '@api.endpoint', '@api.http_method', '@api.request_template', '@api.api_name')">
+                                @api.api_name
+                            </button>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<!-- Unified Request + Response Modal (Final Version) -->
+<div class="modal fade" id="apiModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-dark text-white">
+                <h5 class="modal-title" id="apiModalTitle">API Request / Response</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body">
+                <p><strong id="apiNameLabel"></strong> → <code id="apiEndpointLabel"></code></p>
+
+                <!-- Request Body Section -->
+                <!-- Request Body Section -->
+                <div id="requestBodySection">
+                    <label class="fw-bold">Request Body:</label>
+                    <textarea id="apiBodyEditor"
+                              class="form-control font-monospace mb-3"
+                              rows="10"
+                              spellcheck="false"></textarea>
+
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                       
+                        <div>
+                            <button id="beautifyBtn" class="btn btn-outline-secondary btn-sm me-2">Beautify</button>
+                            <button id="minifyBtn" class="btn btn-outline-secondary btn-sm me-2">Minify</button>
+                            <button id="sendApiBtn" class="btn btn-primary btn-sm me-2">Send Request</button>
+                           @*  <button id="resendApiBtn" class="btn btn-outline-info btn-sm d-none">Re-send</button> *@
+                        </div>
+                    </div>
+                    <hr>
+                </div>
+
+
+                <!-- Response Section -->
+                <div>
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <label class="fw-bold mb-0">Response:</label>
+                        <button id="copyRespBtn" class="btn btn-sm btn-outline-secondary">Copy Response</button>
+                    </div>
+                    <pre id="respPre" class="border rounded p-3 bg-light"
+                         style="white-space:pre-wrap; word-break:break-word; max-height:400px; overflow:auto;">
+(No response yet)
+          </pre>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!-- Toast container -->
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 1100">
+    <div id="toastContainer"></div>
+</div>
+
+@section Scripts {
+    <script>
+        const refreshIntervalMs = 15000; // 15 seconds
+        
+
+        document.addEventListener("DOMContentLoaded", () => {
+            setInterval(refreshWorkerData, refreshIntervalMs);
+            document.getElementById("refreshBtn").addEventListener("click", refreshWorkerData);
+            refreshWorkerData(); // initial load
+        });
+
+        async function refreshWorkerData() {
+            try {
+                const res = await fetch('@Url.Action("GetWorkersJson", "Dashboard")');
+                const data = await res.json();
+                const body = document.getElementById("workerBody");
+                body.innerHTML = "";
+
+                data.forEach(w => {
+                    const badgeClass = w.is_stale ? "bg-danger" :
+                                       (w.status === "Active" ? "bg-success" :
+                                        w.status === "Paused" ? "bg-warning" :
+                                        w.status === "Stopped" ? "bg-danger" : "bg-secondary");
+
+                    const stalePill = w.is_stale
+                        ? `<span class="badge bg-danger ms-2">STALE > 60s</span>`
+                        : "";
+
+                    const row = document.createElement("tr");
+                    row.innerHTML = `
+                        <td>${w.worker_id}</td>
+                        <td>${w.container_name ?? ""}</td>
+                        <td>
+                            <span class="badge ${badgeClass}">${w.status}</span>
+                            ${stalePill}
+                        </td>
+                        <td>${w.last_heartbeat ?? ""}</td>
+                        <td>${w.secs_created_to_hb ?? 0}</td>
+                        <td>${w.response_time_ms ?? 0}</td>
+                        <td><code>${w.api_url ?? ""}</code></td>
+                       <td>${renderButtons(w.api_url, w.status, w.is_stale)}</td>`;
+                    body.appendChild(row);
+                });
+            } catch (err) {
+                showToast("Auto-refresh failed: " + err.message, true);
+            }
+        }
+
+       function renderButtons(apiUrl, status, isStale) {
+    // If stopped or stale → no buttons shown
+    if (status === "Stopped" || isStale) {
+        return `<span class="text-muted fst-italic">Inactive — API disabled</span>`;
+    }
+
+    const apiList = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.ApiList));
+    return apiList.map(a =>
+        `<button class='btn btn-sm ${a.api_name === "Update Config" ? "btn-outline-warning" : "btn-outline-primary"} me-1'
+                 onclick="prepareApiCall('${apiUrl}','${a.endpoint}','${a.http_method}','${a.request_template.replace(/"/g, '&quot;')}','${a.api_name}')">
+            ${a.api_name}
+         </button>`).join("");
+}
+
+
+                      let currentApi = null;
+        let lastRequestBody = null;
+
+               function prepareApiCall(baseUrl, endpoint, method, bodyTemplate, apiName) {
+            currentApi = { baseUrl, endpoint, method };
+
+            document.getElementById("apiNameLabel").innerText = apiName;
+            document.getElementById("apiEndpointLabel").innerText = baseUrl + endpoint;
+
+            const bodySection = document.getElementById("requestBodySection");
+            const editor = document.getElementById("apiBodyEditor");
+            const respPre = document.getElementById("respPre");
+            const resendBtn = document.getElementById("resendApiBtn");
+
+            respPre.textContent = "(No response yet)";
+            if (resendBtn)  resendBtn.classList.add("d-none");
+
+        // Default: show the section but hide textarea when not needed
+        bodySection.style.display = "block";
+
+        const bodyLabel = bodySection.querySelector("label");
+        const bodyEditor = document.getElementById("apiBodyEditor");
+
+         const minifyBtn_ = document.getElementById("minifyBtn");
+          const beautifyBtn_ = document.getElementById("beautifyBtn");
+
+      
+
+        // For Update API → show editor normally
+        if (apiName.toLowerCase().includes("update")) {
+            bodyEditor.style.display = "block";
+            bodyLabel.textContent = "Request Body:";
+            try {
+                if (bodyTemplate && bodyTemplate !== "{}")
+                    bodyEditor.value = JSON.stringify(JSON.parse(bodyTemplate), null, 4);
+                else bodyEditor.value = "";
+            } catch {
+                bodyEditor.value = bodyTemplate;
+            }
+        }
+        // For other APIs → hide editor box but keep Send button visible
+        else {
+            bodyEditor.style.display = "none";
+                    if (minifyBtn_) minifyBtn_.style.display = "none";
+        if (beautifyBtn_) beautifyBtn_.style.display = "none";
+            bodyLabel.textContent = "No request body required for this API:";
+        }
+
+
+            const modal = new bootstrap.Modal(document.getElementById("apiModal"));
+            modal.show();
+
+            // Beautify JSON
+            document.getElementById("beautifyBtn").onclick = () => {
+                try {
+                    const formatted = JSON.stringify(JSON.parse(editor.value), null, 4);
+                    editor.value = formatted;
+                   // showToast("Beautified JSON", false);
+                } catch {
+                    showToast("Invalid JSON: Cannot beautify", true);
+                }
+            };
+
+            // Minify JSON
+            document.getElementById("minifyBtn").onclick = () => {
+                try {
+                    const minified = JSON.stringify(JSON.parse(editor.value));
+                    editor.value = minified;
+                   // showToast("Minified JSON", false);
+                } catch {
+                    showToast("Invalid JSON: Cannot minify", true);
+                }
+            };
+
+            // Send request
+            document.getElementById("sendApiBtn").onclick = async () => {
+                let bodyText = editor.value.trim();
+                if (bodyText) {
+                    try { bodyText = JSON.stringify(JSON.parse(bodyText)); }
+                    catch { showToast("Invalid JSON body!", true); return; }
+                } else {
+                    bodyText = null;
+                }
+                lastRequestBody = bodyText;
+                await callWorkerApi(currentApi.baseUrl, currentApi.endpoint, currentApi.method, bodyText);
+                if (resendBtn) resendBtn.classList.add("d-none"); // Safe check — only if exists
+            };
+
+            // Re-send same request
+            resendBtn.onclick = async () => {
+                if (!lastRequestBody && currentApi.method === "POST") {
+                    showToast("No previous request body found", true);
+                    return;
+                }
+                await callWorkerApi(currentApi.baseUrl, currentApi.endpoint, currentApi.method, lastRequestBody);
+            };
+
+            // Copy response
+            document.getElementById("copyRespBtn").onclick = () => {
+                navigator.clipboard.writeText(respPre.textContent);
+                showToast("Response copied to clipboard", false);
+            };
+        }
+
+
+        async function callWorkerApi(baseUrl, endpoint, method, bodyText) {
+            try {
+                const fullUrl = baseUrl + endpoint;
+                const options = { method };
+                if (method === "POST") {
+                    options.headers = { "Content-Type": "application/json" };
+                    if (bodyText) options.body = bodyText;
+                }
+
+                const res = await fetch(fullUrl, options);
+                const raw = await res.text();
+
+                // Prettify if JSON
+                let display = raw;
+                try { display = JSON.stringify(JSON.parse(raw), null, 2); } catch {}
+
+                const respEl = document.getElementById("respPre");
+                respEl.textContent = `${endpoint} → ${res.status}\n\n${display}`;
+                respEl.scrollTop = respEl.scrollHeight;
+
+                if (res.ok) showToast("API call succeeded", false);
+                else showToast("API call failed (" + res.status + ")", true);
+            } catch (err) {
+                document.getElementById("respPre").textContent = "Error: " + err.message;
+                showToast("API call error: " + err.message, true);
+            }
+        }
+
+
+
+        /* ----- Toast helper ----- */
+        function showToast(msg, isError = false) {
+            const toastId = "toast" + Date.now();
+            const html = `
+                <div id="${toastId}" class="toast align-items-center text-white ${isError ? "bg-danger" : "bg-success"} border-0" role="alert">
+                    <div class="d-flex">
+                        <div class="toast-body">${msg}</div>
+                        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+                    </div>
+                </div>`;
+            const container = document.getElementById("toastContainer");
+            container.insertAdjacentHTML("beforeend", html);
+            const toastEl = document.getElementById(toastId);
+            const toast = new bootstrap.Toast(toastEl, { delay: 3500 });
+            toast.show();
+            toastEl.addEventListener("hidden.bs.toast", () => toastEl.remove());
+        }
+    </script>
+}

@@ -1,34 +1,34 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\WORK\\ZIPEXTRACTOR\\ZipProcessor.Worker\\",
+  "WorkspaceRootPath": "D:\\WORK\\ZIPEXTRACTOR\\ZipProcessor.Worker\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{256AE136-1BC0-F4C7-0891-7796C039CFEF}|ZipProcessor.Worker.csproj|c:\\work\\zipextractor\\zipprocessor.worker\\services\\databaseservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{256AE136-1BC0-F4C7-0891-7796C039CFEF}|ZipProcessor.Worker.csproj|solutionrelative:services\\databaseservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{256AE136-1BC0-F4C7-0891-7796C039CFEF}|ZipProcessor.Worker.csproj|d:\\work\\zipextractor\\zipprocessor.worker\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{256AE136-1BC0-F4C7-0891-7796C039CFEF}|ZipProcessor.Worker.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{256AE136-1BC0-F4C7-0891-7796C039CFEF}|ZipProcessor.Worker.csproj|c:\\work\\zipextractor\\zipprocessor.worker\\services\\requestjobservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{256AE136-1BC0-F4C7-0891-7796C039CFEF}|ZipProcessor.Worker.csproj|solutionrelative:services\\requestjobservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{256AE136-1BC0-F4C7-0891-7796C039CFEF}|ZipProcessor.Worker.csproj|d:\\work\\zipextractor\\zipprocessor.worker\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{256AE136-1BC0-F4C7-0891-7796C039CFEF}|ZipProcessor.Worker.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{256AE136-1BC0-F4C7-0891-7796C039CFEF}|ZipProcessor.Worker.csproj|c:\\work\\zipextractor\\zipprocessor.worker\\worker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{256AE136-1BC0-F4C7-0891-7796C039CFEF}|ZipProcessor.Worker.csproj|d:\\work\\zipextractor\\zipprocessor.worker\\worker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{256AE136-1BC0-F4C7-0891-7796C039CFEF}|ZipProcessor.Worker.csproj|solutionrelative:worker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{256AE136-1BC0-F4C7-0891-7796C039CFEF}|ZipProcessor.Worker.csproj|c:\\work\\zipextractor\\zipprocessor.worker\\models\\apiresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{256AE136-1BC0-F4C7-0891-7796C039CFEF}|ZipProcessor.Worker.csproj|solutionrelative:models\\apiresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{256AE136-1BC0-F4C7-0891-7796C039CFEF}|ZipProcessor.Worker.csproj|d:\\work\\zipextractor\\zipprocessor.worker\\workercontrolstate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{256AE136-1BC0-F4C7-0891-7796C039CFEF}|ZipProcessor.Worker.csproj|solutionrelative:workercontrolstate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{256AE136-1BC0-F4C7-0891-7796C039CFEF}|ZipProcessor.Worker.csproj|c:\\work\\zipextractor\\zipprocessor.worker\\services\\apiservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{256AE136-1BC0-F4C7-0891-7796C039CFEF}|ZipProcessor.Worker.csproj|solutionrelative:services\\apiservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{256AE136-1BC0-F4C7-0891-7796C039CFEF}|ZipProcessor.Worker.csproj|d:\\work\\zipextractor\\zipprocessor.worker\\models\\workersettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{256AE136-1BC0-F4C7-0891-7796C039CFEF}|ZipProcessor.Worker.csproj|solutionrelative:models\\workersettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{256AE136-1BC0-F4C7-0891-7796C039CFEF}|ZipProcessor.Worker.csproj|c:\\work\\zipextractor\\zipprocessor.worker\\services\\zipservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{256AE136-1BC0-F4C7-0891-7796C039CFEF}|ZipProcessor.Worker.csproj|solutionrelative:services\\zipservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{256AE136-1BC0-F4C7-0891-7796C039CFEF}|ZipProcessor.Worker.csproj|d:\\work\\zipextractor\\zipprocessor.worker\\services\\databaseservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{256AE136-1BC0-F4C7-0891-7796C039CFEF}|ZipProcessor.Worker.csproj|solutionrelative:services\\databaseservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{256AE136-1BC0-F4C7-0891-7796C039CFEF}|ZipProcessor.Worker.csproj|c:\\work\\zipextractor\\zipprocessor.worker\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{256AE136-1BC0-F4C7-0891-7796C039CFEF}|ZipProcessor.Worker.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{256AE136-1BC0-F4C7-0891-7796C039CFEF}|ZipProcessor.Worker.csproj|d:\\work\\zipextractor\\zipprocessor.worker\\docker-compose.yml||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{256AE136-1BC0-F4C7-0891-7796C039CFEF}|ZipProcessor.Worker.csproj|solutionrelative:docker-compose.yml||{8B382828-6202-11D1-8870-0000F87579D2}"
     }
   ],
   "DocumentGroupContainers": [
@@ -38,98 +38,104 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 3,
           "Children": [
             {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Worker.cs",
-              "DocumentMoniker": "C:\\WORK\\ZIPEXTRACTOR\\ZipProcessor.Worker\\Worker.cs",
-              "RelativeDocumentMoniker": "Worker.cs",
-              "ToolTip": "C:\\WORK\\ZIPEXTRACTOR\\ZipProcessor.Worker\\Worker.cs",
-              "RelativeToolTip": "Worker.cs",
-              "ViewState": "AgIAAB4AAAAAAAAAAAAgwCgAAAANAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-28T11:30:24.144Z",
-              "EditorCaption": ""
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{40ea2e6b-2121-4bb8-a43e-c83c04b51041}"
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "Zipservice.cs",
-              "DocumentMoniker": "C:\\WORK\\ZIPEXTRACTOR\\ZipProcessor.Worker\\Services\\Zipservice.cs",
-              "RelativeDocumentMoniker": "Services\\Zipservice.cs",
-              "ToolTip": "C:\\WORK\\ZIPEXTRACTOR\\ZipProcessor.Worker\\Services\\Zipservice.cs",
-              "RelativeToolTip": "Services\\Zipservice.cs",
-              "ViewState": "AgIAAAUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Title": "DatabaseService.cs",
+              "DocumentMoniker": "D:\\WORK\\ZIPEXTRACTOR\\ZipProcessor.Worker\\Services\\DatabaseService.cs",
+              "RelativeDocumentMoniker": "Services\\DatabaseService.cs",
+              "ToolTip": "D:\\WORK\\ZIPEXTRACTOR\\ZipProcessor.Worker\\Services\\DatabaseService.cs",
+              "RelativeToolTip": "Services\\DatabaseService.cs",
+              "ViewState": "AgIAABUAAAAAAAAAAADwvxoAAAAOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-28T11:29:48.28Z",
+              "WhenOpened": "2025-11-11T10:36:12.592Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "DatabaseService.cs",
-              "DocumentMoniker": "C:\\WORK\\ZIPEXTRACTOR\\ZipProcessor.Worker\\Services\\DatabaseService.cs",
-              "RelativeDocumentMoniker": "Services\\DatabaseService.cs",
-              "ToolTip": "C:\\WORK\\ZIPEXTRACTOR\\ZipProcessor.Worker\\Services\\DatabaseService.cs",
-              "RelativeToolTip": "Services\\DatabaseService.cs",
-              "ViewState": "AgIAAA0AAAAAAAAAAAAAAA0AAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-28T11:29:43.723Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "RequestJobService.cs",
-              "DocumentMoniker": "C:\\WORK\\ZIPEXTRACTOR\\ZipProcessor.Worker\\Services\\RequestJobService.cs",
-              "RelativeDocumentMoniker": "Services\\RequestJobService.cs",
-              "ToolTip": "C:\\WORK\\ZIPEXTRACTOR\\ZipProcessor.Worker\\Services\\RequestJobService.cs",
-              "RelativeToolTip": "Services\\RequestJobService.cs",
-              "ViewState": "AgIAABQAAAAAAAAAAAAAABoAAABVAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-28T10:10:28.652Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "ApiResponse.cs",
-              "DocumentMoniker": "C:\\WORK\\ZIPEXTRACTOR\\ZipProcessor.Worker\\Models\\ApiResponse.cs",
-              "RelativeDocumentMoniker": "Models\\ApiResponse.cs",
-              "ToolTip": "C:\\WORK\\ZIPEXTRACTOR\\ZipProcessor.Worker\\Models\\ApiResponse.cs",
-              "RelativeToolTip": "Models\\ApiResponse.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAyAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-28T10:14:11.497Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "ApiService.cs",
-              "DocumentMoniker": "C:\\WORK\\ZIPEXTRACTOR\\ZipProcessor.Worker\\Services\\ApiService.cs",
-              "RelativeDocumentMoniker": "Services\\ApiService.cs",
-              "ToolTip": "C:\\WORK\\ZIPEXTRACTOR\\ZipProcessor.Worker\\Services\\ApiService.cs",
-              "RelativeToolTip": "Services\\ApiService.cs",
-              "ViewState": "AgIAABIAAAAAAAAAAAAowBwAAAALAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-28T10:07:15.435Z",
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\WORK\\ZIPEXTRACTOR\\ZipProcessor.Worker\\appsettings.json",
+              "RelativeDocumentMoniker": "appsettings.json",
+              "ToolTip": "D:\\WORK\\ZIPEXTRACTOR\\ZipProcessor.Worker\\appsettings.json",
+              "RelativeToolTip": "appsettings.json",
+              "ViewState": "AgIAACcAAAAAAAAAAAAAwDsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-11-03T23:32:34.167Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 6,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\WORK\\ZIPEXTRACTOR\\ZipProcessor.Worker\\appsettings.json",
-              "RelativeDocumentMoniker": "appsettings.json",
-              "ToolTip": "C:\\WORK\\ZIPEXTRACTOR\\ZipProcessor.Worker\\appsettings.json",
-              "RelativeToolTip": "appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAxAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-10-28T10:06:22.71Z",
+              "Title": "docker-compose.yml",
+              "DocumentMoniker": "D:\\WORK\\ZIPEXTRACTOR\\ZipProcessor.Worker\\docker-compose.yml",
+              "RelativeDocumentMoniker": "docker-compose.yml",
+              "ToolTip": "D:\\WORK\\ZIPEXTRACTOR\\ZipProcessor.Worker\\docker-compose.yml",
+              "RelativeToolTip": "docker-compose.yml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003775|",
+              "WhenOpened": "2025-11-03T23:32:33.596Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\WORK\\ZIPEXTRACTOR\\ZipProcessor.Worker\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "D:\\WORK\\ZIPEXTRACTOR\\ZipProcessor.Worker\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAADkAAAAAAAAAAAAqwB4AAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-03T23:31:49Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "WorkerControlState.cs",
+              "DocumentMoniker": "D:\\WORK\\ZIPEXTRACTOR\\ZipProcessor.Worker\\WorkerControlState.cs",
+              "RelativeDocumentMoniker": "WorkerControlState.cs",
+              "ToolTip": "D:\\WORK\\ZIPEXTRACTOR\\ZipProcessor.Worker\\WorkerControlState.cs",
+              "RelativeToolTip": "WorkerControlState.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAgwAgAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-04T05:24:55.067Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Worker.cs",
+              "DocumentMoniker": "D:\\WORK\\ZIPEXTRACTOR\\ZipProcessor.Worker\\Worker.cs",
+              "RelativeDocumentMoniker": "Worker.cs",
+              "ToolTip": "D:\\WORK\\ZIPEXTRACTOR\\ZipProcessor.Worker\\Worker.cs",
+              "RelativeToolTip": "Worker.cs",
+              "ViewState": "AgIAAHEBAAAAAAAAAAAWwHMBAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-03T23:19:51.687Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "WorkerSettings.cs",
+              "DocumentMoniker": "D:\\WORK\\ZIPEXTRACTOR\\ZipProcessor.Worker\\Models\\WorkerSettings.cs",
+              "RelativeDocumentMoniker": "Models\\WorkerSettings.cs",
+              "ToolTip": "D:\\WORK\\ZIPEXTRACTOR\\ZipProcessor.Worker\\Models\\WorkerSettings.cs",
+              "RelativeToolTip": "Models\\WorkerSettings.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-03T23:32:00.352Z"
             }
           ]
         }

@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ZipProcessor.Worker")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7cc3309d2867a8b9ce7c5efe31129ef51592bf8f")]
 [assembly: System.Reflection.AssemblyProductAttribute("ZipProcessor.Worker")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ZipProcessor.Worker")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

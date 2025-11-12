@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>722b43e3-3540-4bce-87ef-e9b172906796</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerfileContext>.</DockerfileContext>
+  </PropertyGroup>
+
+
+
+<ItemGroup>
+  <PackageReference Include="Dapper" Version="2.1.35" />
+  <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="9.0.10" />
+  <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.22.1" />
+  <PackageReference Include="MySql.Data" Version="9.0.0" />
+  <PackageReference Include="Docker.DotNet" Version="3.125.2" />
+  <PackageReference Include="System.Diagnostics.Process" Version="4.3.0" />
+</ItemGroup>
+</Project>

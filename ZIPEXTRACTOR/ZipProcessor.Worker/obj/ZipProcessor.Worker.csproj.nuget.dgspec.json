@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\WORK\\ZIPEXTRACTOR\\ZipProcessor.Worker\\ZipProcessor.Worker.csproj": {}
+    "D:\\WORK\\ZIPEXTRACTOR\\ZipProcessor.Worker\\ZipProcessor.Worker.csproj": {}
   },
   "projects": {
-    "C:\\WORK\\ZIPEXTRACTOR\\ZipProcessor.Worker\\ZipProcessor.Worker.csproj": {
+    "D:\\WORK\\ZIPEXTRACTOR\\ZipProcessor.Worker\\ZipProcessor.Worker.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\WORK\\ZIPEXTRACTOR\\ZipProcessor.Worker\\ZipProcessor.Worker.csproj",
+        "projectUniqueName": "D:\\WORK\\ZIPEXTRACTOR\\ZipProcessor.Worker\\ZipProcessor.Worker.csproj",
         "projectName": "ZipProcessor.Worker",
-        "projectPath": "C:\\WORK\\ZIPEXTRACTOR\\ZipProcessor.Worker\\ZipProcessor.Worker.csproj",
+        "projectPath": "D:\\WORK\\ZIPEXTRACTOR\\ZipProcessor.Worker\\ZipProcessor.Worker.csproj",
         "packagesPath": "C:\\Users\\Fathima P A\\.nuget\\packages\\",
-        "outputPath": "C:\\WORK\\ZIPEXTRACTOR\\ZipProcessor.Worker\\obj\\",
+        "outputPath": "D:\\WORK\\ZIPEXTRACTOR\\ZipProcessor.Worker\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -50,9 +50,17 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "dependencies": {
+            "AspNetCore.HealthChecks.MySql": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            },
             "Dapper": {
               "target": "Package",
               "version": "[2.1.66, )"
+            },
+            "Microsoft.Data.SqlClient": {
+              "target": "Package",
+              "version": "[6.1.2, )"
             },
             "Microsoft.Extensions.Hosting": {
               "target": "Package",
@@ -62,9 +70,17 @@
               "target": "Package",
               "version": "[9.0.10, )"
             },
+            "MySql.Data": {
+              "target": "Package",
+              "version": "[9.5.0, )"
+            },
             "MySqlConnector": {
               "target": "Package",
               "version": "[2.4.0, )"
+            },
+            "Polly": {
+              "target": "Package",
+              "version": "[8.6.4, )"
             },
             "Serilog.AspNetCore": {
               "target": "Package",

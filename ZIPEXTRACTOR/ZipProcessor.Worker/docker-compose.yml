@@ -1,0 +1,9 @@
+version: "3.9"
+services:
+  worker:
+    image: zipprocessor-worker:latest
+    deploy:
+      replicas: 5
+    environment:
+      - ConnectionStrings__DefaultConnection=Server=mysql;Database=zipdb;User=root;Password=1234;
+    restart: always

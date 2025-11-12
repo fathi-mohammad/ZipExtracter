@@ -1,0 +1,120 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\WORK\\ZIPEXTRACTOR\\ZipProcessing.WebApi\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{3FBF612D-FC23-2114-511E-9A53C42766F2}|ZipProcessing.WebApi.csproj|d:\\work\\zipextractor\\zipprocessing.webapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{3FBF612D-FC23-2114-511E-9A53C42766F2}|ZipProcessing.WebApi.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3FBF612D-FC23-2114-511E-9A53C42766F2}|ZipProcessing.WebApi.csproj|d:\\work\\zipextractor\\zipprocessing.webapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3FBF612D-FC23-2114-511E-9A53C42766F2}|ZipProcessing.WebApi.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3FBF612D-FC23-2114-511E-9A53C42766F2}|ZipProcessing.WebApi.csproj|d:\\work\\zipextractor\\zipprocessing.webapi\\models\\jobrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3FBF612D-FC23-2114-511E-9A53C42766F2}|ZipProcessing.WebApi.csproj|solutionrelative:models\\jobrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3FBF612D-FC23-2114-511E-9A53C42766F2}|ZipProcessing.WebApi.csproj|d:\\work\\zipextractor\\zipprocessing.webapi\\services\\jobservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3FBF612D-FC23-2114-511E-9A53C42766F2}|ZipProcessing.WebApi.csproj|solutionrelative:services\\jobservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3FBF612D-FC23-2114-511E-9A53C42766F2}|ZipProcessing.WebApi.csproj|d:\\work\\zipextractor\\zipprocessing.webapi\\zipprocessing.webapi.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}",
+      "RelativeMoniker": "D:0:0:{3FBF612D-FC23-2114-511E-9A53C42766F2}|ZipProcessing.WebApi.csproj|solutionrelative:zipprocessing.webapi.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3FBF612D-FC23-2114-511E-9A53C42766F2}|ZipProcessing.WebApi.csproj|d:\\work\\zipextractor\\zipprocessing.webapi\\zipprocessing.webapi.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{3FBF612D-FC23-2114-511E-9A53C42766F2}|ZipProcessing.WebApi.csproj|solutionrelative:zipprocessing.webapi.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\WORK\\ZIPEXTRACTOR\\ZipProcessing.WebApi\\appsettings.json",
+              "RelativeDocumentMoniker": "appsettings.json",
+              "ToolTip": "D:\\WORK\\ZIPEXTRACTOR\\ZipProcessing.WebApi\\appsettings.json",
+              "RelativeToolTip": "appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-10-28T09:21:56.202Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ZipProcessing.WebApi.http",
+              "DocumentMoniker": "D:\\WORK\\ZIPEXTRACTOR\\ZipProcessing.WebApi\\ZipProcessing.WebApi.http",
+              "RelativeDocumentMoniker": "ZipProcessing.WebApi.http",
+              "ToolTip": "D:\\WORK\\ZIPEXTRACTOR\\ZipProcessing.WebApi\\ZipProcessing.WebApi.http",
+              "RelativeToolTip": "ZipProcessing.WebApi.http",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
+              "WhenOpened": "2025-10-28T09:21:53.559Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\WORK\\ZIPEXTRACTOR\\ZipProcessing.WebApi\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "D:\\WORK\\ZIPEXTRACTOR\\ZipProcessing.WebApi\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAAABYAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-28T09:20:48.343Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "JobService.cs",
+              "DocumentMoniker": "D:\\WORK\\ZIPEXTRACTOR\\ZipProcessing.WebApi\\Services\\JobService.cs",
+              "RelativeDocumentMoniker": "Services\\JobService.cs",
+              "ToolTip": "D:\\WORK\\ZIPEXTRACTOR\\ZipProcessing.WebApi\\Services\\JobService.cs",
+              "RelativeToolTip": "Services\\JobService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-28T09:20:00.016Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "JobRequest.cs",
+              "DocumentMoniker": "D:\\WORK\\ZIPEXTRACTOR\\ZipProcessing.WebApi\\Models\\JobRequest.cs",
+              "RelativeDocumentMoniker": "Models\\JobRequest.cs",
+              "ToolTip": "D:\\WORK\\ZIPEXTRACTOR\\ZipProcessing.WebApi\\Models\\JobRequest.cs",
+              "RelativeToolTip": "Models\\JobRequest.cs",
+              "ViewState": "AgIAAB8AAAAAAAAAAAAUwDwAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-28T09:18:28.728Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ZipProcessing.WebApi.csproj",
+              "DocumentMoniker": "D:\\WORK\\ZIPEXTRACTOR\\ZipProcessing.WebApi\\ZipProcessing.WebApi.csproj",
+              "RelativeDocumentMoniker": "ZipProcessing.WebApi.csproj",
+              "ToolTip": "D:\\WORK\\ZIPEXTRACTOR\\ZipProcessing.WebApi\\ZipProcessing.WebApi.csproj",
+              "RelativeToolTip": "ZipProcessing.WebApi.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-10-28T09:19:33.136Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
